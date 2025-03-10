@@ -148,30 +148,72 @@ root@DebianNew:~/.kube# kubectl exec pods/deployment-test-9579474fb-pdsxb -c mul
 3. Продемонстрировать возможность чтения и записи файла изнутри пода. 
 4. Предоставить манифесты, а также скриншоты или вывод необходимых команд.
 
-Включим и настроим NFS-сервер на MicroK8S.
+Deploy
 
-microk8s enable community
-
-microk8s enable nfs
-
-sudo apt update && sudo apt install nfs-kernel-server
-
-Так и не осилил установку и настройку NFS-сервера. 
-
-По вашей ссылке https://github.com/netology-code/kuber-homeworks/blob/main/2.2/2.2.md на инструкцию падает 404.
-
-Пытался по вашему видео сделать, с какими-то падениями и костылями что-то установил, но...
-
-```root@DebianNew:~/.kube# kubectl get storageclasses
-NAME      PROVISIONER        RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
-csi-s3    ru.yandex.s3.csi   Delete          Immediate           false                  5m2s
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-app
+  template:
+    metadata:
+      labels:
+        app: nfs-app
+    spec:
+      containers:
+        - name: nfs-container
+          image: wbitt/network-multitool 
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "/srv/nfs"
+              name: nfs-volume
+      volumes:
+        - name: nfs-volume
+          persistentVolumeClaim:
+            claimName: nfs-share
 ```
 
-Да у вас даже лектор не с первого раза это всё поставил и сам долго мучался и вспоминал. 
+PVC
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-share
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi 
+  storageClassName: nfs-csi
+```
 
-Просьба помочь с установкой и настройкой NFS, с самого нуля, максимально подробно и по шагам.
+SC
+```
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-csi
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 5*.2*0.7*.*9  
+  share: /srv/nfs           
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+mountOptions:
+  - vers=4.1
+```
 
-Вводные данные, если нужны: у меня Кубер на тачке яндекса (Ubuntu), работаю с VirtualBox (Debian)
+Создал файл внутри пода в VirtualBox, затем зашёл на сервер NFS (Yandex.Cloud) и открыл этот файл там
+
+![alt text](https://github.com/MaratKN/kuber-homeworks-07/blob/main/5.png)
+![alt text](https://github.com/MaratKN/kuber-homeworks-07/blob/main/6.png)
 
 ------
 
