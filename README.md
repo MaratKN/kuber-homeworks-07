@@ -79,14 +79,6 @@ spec:
           claimName: pvc-test
 ```
 
-Запустим Deployment
-
-root@DebianNew:~/.kube# kubectl apply -f deployment-test.yaml
-
-Запускаем и видим, что статус пода = Pending, так как не готов PVC
-
-![alt text](https://github.com/MaratKN/kuber-homeworks-07/blob/main/1.png)
-
 Создадим PV
 
 ```
@@ -177,7 +169,7 @@ csi-s3    ru.yandex.s3.csi   Delete          Immediate           false          
 
 Да у вас даже лектор не с первого раза это всё поставил и сам долго мучался и вспоминал. 
 
-Просьба помочь с установкой и настройкой NFS, максимально подробно и по шагам.
+Просьба помочь с установкой и настройкой NFS, с самого нуля, максимально подробно и по шагам.
 
 Вводные данные, если нужны: у меня Кубер на тачке яндекса (Ubuntu), работаю с VirtualBox (Debian)
 
