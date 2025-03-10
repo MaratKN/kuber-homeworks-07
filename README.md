@@ -168,7 +168,18 @@ sudo apt update && sudo apt install nfs-kernel-server
 
 По вашей ссылке https://github.com/netology-code/kuber-homeworks/blob/main/2.2/2.2.md на инструкцию падает 404.
 
-Просьба помочь с установкой и настройкой NFS
+Пытался по вашему видео сделать, с какими-то падениями и костылями что-то установил, но...
+
+```root@DebianNew:~/.kube# kubectl get storageclasses
+NAME      PROVISIONER        RECLAIMPOLICY   VOLUMEBINDINGMODE   ALLOWVOLUMEEXPANSION   AGE
+csi-s3    ru.yandex.s3.csi   Delete          Immediate           false                  5m2s
+```
+
+Да у вас даже лектор не с первого раза это всё поставил и сам долго мучался и вспоминал. 
+
+Просьба помочь с установкой и настройкой NFS, максимально подробно и по шагам.
+
+Вводные данные, если нужны: у меня Кубер на тачке яндекса (Ubuntu), работаю с VirtualBox (Debian)
 
 ------
 
