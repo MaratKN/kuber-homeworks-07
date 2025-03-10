@@ -168,10 +168,6 @@ sudo apt update && sudo apt install nfs-kernel-server
 
 По вашей ссылке https://github.com/netology-code/kuber-homeworks/blob/main/2.2/2.2.md на инструкцию падает 404.
 
-Пытался сделать по видео https://netology.ru/profile/program/shkuber-8/lessons/431734/lesson_items/2330212
-
-Но уже на 52:45 поймал ошибку Error: INSTALLATION FAILED: path "./csi-s3/" not found
-
 Просьба помочь с установкой и настройкой NFS
 
 ------
