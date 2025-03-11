@@ -85,7 +85,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: pv-local
+  name: pv-test
 spec:
   storageClassName: host-path
   capacity:
@@ -102,7 +102,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pvc-local
+  name: pvc-test
 spec:
   storageClassName: host-path
   volumeMode: Filesystem
