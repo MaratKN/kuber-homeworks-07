@@ -59,7 +59,7 @@ spec:
       containers:
       - name: busybox
         image: busybox
-        command: ['sh', '-c', 'while true; do echo Hello world! >> /output/output.txt; sleep 5; done']
+        command: ['sh', '-c', 'while true; do echo I can see you! >> /output/output.txt; sleep 5; done']
         volumeMounts:
         - name: pv-test
           mountPath: /output
